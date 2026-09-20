@@ -1,0 +1,1778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | Karmayogi LearnAI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    /* ========== CSS VARIABLES & RESET ========== */
+    :root {
+      --primary: #3b5bdb;
+      --primary-hover: #364fc7;
+      --primary-light: #edf2ff;
+      --primary-soft: #dbe4ff;
+      --success: #2f9e44;
+      --success-bg: #ebfbee;
+      --warning: #f08c00;
+      --warning-bg: #fff9db;
+      --danger: #e03131;
+      --danger-bg: #fff5f5;
+      --text-primary: #1a1d23;
+      --text-secondary: #495057;
+      --text-muted: #868e96;
+      --border: #e9ecef;
+      --border-strong: #dee2e6;
+      --bg-body: #f1f3f5;
+      --bg-card: #ffffff;
+      --bg-sidebar: #ffffff;
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+      --radius: 10px;
+      --radius-sm: 6px;
+      --sidebar-width: 250px;
+      --header-height: 64px;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 20px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-10: 40px;
+      --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-body);
+      color: var(--text-primary);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* ========== SIDEBAR ========== */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: var(--sidebar-width);
+      height: 100vh;
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      z-index: 1000;
+      transition: transform 0.25s ease;
+    }
+
+    .sidebar-header {
+      padding: var(--space-5) var(--space-5) var(--space-4);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--primary);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .logo-text h1 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    .logo-text span {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .sidebar-nav {
+      flex: 1;
+      overflow-y: auto;
+      padding: var(--space-4) var(--space-3);
+    }
+
+    .nav-section {
+      margin-bottom: var(--space-5);
+    }
+
+    .nav-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      padding: 0 var(--space-3);
+      margin-bottom: var(--space-2);
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: 9px var(--space-3);
+      border-radius: var(--radius-sm);
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: background 0.15s, color 0.15s;
+      margin-bottom: 2px;
+    }
+
+    .nav-item i {
+      width: 20px;
+      text-align: center;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .nav-item:hover {
+      background: var(--bg-body);
+      color: var(--text-primary);
+    }
+
+    .nav-item:hover i {
+      color: var(--text-secondary);
+    }
+
+    .nav-item.active {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .nav-item.active i {
+      color: var(--primary);
+    }
+
+    .sidebar-footer {
+      padding: var(--space-3);
+      border-top: 1px solid var(--border);
+    }
+
+    .sidebar-footer .nav-item {
+      margin-bottom: 0;
+    }
+
+    /* ========== MAIN LAYOUT ========== */
+    .main-wrapper {
+      margin-left: var(--sidebar-width);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ========== HEADER ========== */
+    .header {
+      height: var(--header-height);
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--space-6);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 36px;
+      height: 36px;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-sm);
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+    }
+
+    .menu-toggle:hover {
+      background: var(--bg-body);
+    }
+
+    .page-title h2 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+
+    .page-title p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 1px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .notification-btn {
+      position: relative;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      transition: background 0.15s;
+    }
+
+    .notification-btn:hover {
+      background: var(--bg-body);
+    }
+
+    .notification-badge {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      width: 8px;
+      height: 8px;
+      background: var(--danger);
+      border-radius: 50%;
+      border: 2px solid #fff;
+    }
+
+    .user-menu {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: 4px 8px 4px 4px;
+      border-radius: 24px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .user-menu:hover {
+      background: var(--bg-body);
+    }
+
+    .user-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #4c6ef5, #3b5bdb);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    .user-info {
+      text-align: left;
+    }
+
+    .user-info .name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+
+    .user-info .role {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    .user-menu .fa-chevron-down {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      margin-left: 2px;
+    }
+
+    /* ========== CONTENT ========== */
+    .content {
+      flex: 1;
+      padding: var(--space-6);
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* ========== WELCOME BANNER ========== */
+    .welcome-banner {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: var(--space-5) var(--space-6);
+      margin-bottom: var(--space-6);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-6);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .welcome-text h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .welcome-text p {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .welcome-stats {
+      display: flex;
+      gap: var(--space-6);
+      flex-shrink: 0;
+    }
+
+    .welcome-stat {
+      text-align: center;
+    }
+
+    .welcome-stat .value {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .welcome-stat .label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .welcome-cta {
+      flex-shrink: 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: 9px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: background 0.15s, border-color 0.15s, color 0.15s, box-shadow 0.15s;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      box-shadow: 0 2px 8px rgba(59, 91, 219, 0.3);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border-strong);
+      color: var(--text-secondary);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .btn-sm {
+      padding: 6px 12px;
+      font-size: 0.8rem;
+    }
+
+    /* ========== KPI CARDS ========== */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-4);
+      margin-bottom: var(--space-6);
+    }
+
+    .kpi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: var(--space-5);
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.15s, border-color 0.15s;
+    }
+
+    .kpi-card:hover {
+      box-shadow: var(--shadow);
+      border-color: var(--border-strong);
+    }
+
+    .kpi-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-3);
+    }
+
+    .kpi-title {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .kpi-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+    }
+
+    .kpi-icon.blue {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .kpi-icon.green {
+      background: var(--success-bg);
+      color: var(--success);
+    }
+
+    .kpi-icon.orange {
+      background: var(--warning-bg);
+      color: var(--warning);
+    }
+
+    .kpi-icon.indigo {
+      background: #f3f0ff;
+      color: #5f3dc4;
+    }
+
+    .kpi-value {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+
+    .kpi-sub {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .kpi-sub.positive {
+      color: var(--success);
+      font-weight: 500;
+    }
+
+    /* Circular progress for KPI 1 */
+    .circular-progress {
+      position: relative;
+      width: 56px;
+      height: 56px;
+      flex-shrink: 0;
+    }
+
+    .circular-progress svg {
+      transform: rotate(-90deg);
+    }
+
+    .circular-progress .bg {
+      fill: none;
+      stroke: var(--border);
+      stroke-width: 5;
+    }
+
+    .circular-progress .fg {
+      fill: none;
+      stroke: var(--primary);
+      stroke-width: 5;
+      stroke-linecap: round;
+      stroke-dasharray: 157;
+      stroke-dashoffset: 44; /* 157 * (1 - 0.72) */
+    }
+
+    .circular-progress .pct {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    /* Progress bar for KPI 2 */
+    .progress-bar-wrap {
+      height: 6px;
+      background: var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-top: var(--space-3);
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 3px;
+      width: 68%;
+    }
+
+    /* ========== GRID LAYOUTS ========== */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: var(--space-5);
+      margin-bottom: var(--space-5);
+    }
+
+    .grid-2-equal {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-5);
+      margin-bottom: var(--space-5);
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-4);
+    }
+
+    /* ========== CARD BASE ========== */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+
+    .card-header {
+      padding: var(--space-4) var(--space-5);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-3);
+    }
+
+    .card-header h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .card-header p {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .card-body {
+      padding: var(--space-5);
+    }
+
+    /* ========== COMPETENCY OVERVIEW ========== */
+    .competency-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+
+    .competency-item {
+      display: grid;
+      grid-template-columns: 140px 1fr 48px;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .competency-name {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .competency-bar-wrap {
+      height: 8px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .competency-bar {
+      height: 100%;
+      border-radius: 4px;
+    }
+
+    .competency-bar.strong {
+      background: var(--success);
+    }
+
+    .competency-bar.good {
+      background: var(--primary);
+    }
+
+    .competency-bar.needs {
+      background: var(--warning);
+    }
+
+    .competency-bar.gap {
+      background: var(--danger);
+    }
+
+    .competency-pct {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-align: right;
+    }
+
+    .competency-status {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-top: 2px;
+    }
+
+    .status-strong {
+      background: var(--success-bg);
+      color: var(--success);
+    }
+
+    .status-good {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .status-needs {
+      background: var(--warning-bg);
+      color: var(--warning);
+    }
+
+    .status-gap {
+      background: var(--danger-bg);
+      color: var(--danger);
+    }
+
+    .competency-alert {
+      margin-top: var(--space-5);
+      padding: var(--space-4);
+      background: var(--danger-bg);
+      border: 1px solid #ffc9c9;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+    }
+
+    .competency-alert i {
+      color: var(--danger);
+      margin-top: 2px;
+      font-size: 0.95rem;
+    }
+
+    .competency-alert-content h4 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+
+    .competency-alert-content p {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-bottom: var(--space-3);
+    }
+
+    /* ========== RECOMMENDATIONS ========== */
+    .course-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: var(--space-4);
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.15s, border-color 0.15s;
+      height: 100%;
+    }
+
+    .course-card:hover {
+      box-shadow: var(--shadow);
+      border-color: var(--border-strong);
+    }
+
+    .course-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      margin-bottom: var(--space-3);
+    }
+
+    .course-icon.ethics {
+      background: #fff5f5;
+      color: #e03131;
+    }
+
+    .course-icon.analysis {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .course-icon.sampling {
+      background: #f3f0ff;
+      color: #5f3dc4;
+    }
+
+    .course-category {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-bottom: 4px;
+    }
+
+    .course-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: var(--space-2);
+      line-height: 1.35;
+    }
+
+    .course-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      margin-bottom: var(--space-3);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .course-meta span {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .course-reason {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      background: var(--bg-body);
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-sm);
+      margin-bottom: var(--space-4);
+      line-height: 1.4;
+      flex: 1;
+    }
+
+    .course-card .btn {
+      width: 100%;
+      justify-content: center;
+      margin-top: auto;
+    }
+
+    /* ========== ASSESSMENTS TABLE ========== */
+    .assessment-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+
+    .assessment-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .assessment-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .assessment-row:first-child {
+      padding-top: 0;
+    }
+
+    .assessment-info h4 {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+
+    .assessment-meta {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      display: flex;
+      gap: var(--space-3);
+      flex-wrap: wrap;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 12px;
+    }
+
+    .status-badge.pending {
+      background: var(--warning-bg);
+      color: var(--warning);
+    }
+
+    /* ========== RECENT ACTIVITY ========== */
+    .activity-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .activity-item {
+      display: flex;
+      gap: var(--space-3);
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .activity-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .activity-item:first-child {
+      padding-top: 0;
+    }
+
+    .activity-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--success-bg);
+      color: var(--success);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      flex-shrink: 0;
+    }
+
+    .activity-content {
+      flex: 1;
+    }
+
+    .activity-content p {
+      font-size: 0.85rem;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .activity-content time {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* ========== LEARNING CHART ========== */
+    .chart-container {
+      width: 100%;
+      height: 200px;
+      position: relative;
+    }
+
+    .chart-container svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .chart-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: var(--space-2);
+    }
+
+    /* ========== AI TUTOR CARD ========== */
+    .ai-tutor-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: var(--space-5) var(--space-6);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-5);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: var(--space-6);
+    }
+
+    .ai-tutor-left {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .ai-tutor-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    .ai-tutor-text h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+
+    .ai-tutor-text p {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      max-width: 480px;
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      padding: var(--space-6) var(--space-6) var(--space-8);
+      border-top: 1px solid var(--border);
+      margin-top: auto;
+    }
+
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+    }
+
+    .footer-brand {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .footer-brand strong {
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: var(--space-5);
+    }
+
+    .footer-links a {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      transition: color 0.15s;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    .footer-copy {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      width: 100%;
+      text-align: center;
+      margin-top: var(--space-3);
+      padding-top: var(--space-3);
+      border-top: 1px solid var(--border);
+    }
+
+    /* ========== OVERLAY (mobile) ========== */
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.35);
+      z-index: 999;
+    }
+
+    .sidebar-overlay.active {
+      display: block;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 1100px) {
+      .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .sidebar {
+        transform: translateX(-100%);
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+      }
+
+      .main-wrapper {
+        margin-left: 0;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      .welcome-banner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .welcome-stats {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .ai-tutor-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .user-info {
+        display: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .content {
+        padding: var(--space-4);
+      }
+
+      .kpi-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .grid-2-equal {
+        grid-template-columns: 1fr;
+      }
+
+      .competency-item {
+        grid-template-columns: 1fr;
+        gap: var(--space-2);
+      }
+
+      .competency-pct {
+        text-align: left;
+      }
+
+      .header {
+        padding: 0 var(--space-4);
+      }
+
+      .page-title p {
+        display: none;
+      }
+
+      .assessment-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-2);
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-links {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ========== SIDEBAR ========== -->
+  <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+    <div class="sidebar-header">
+      <div class="logo-wrap">
+        <div class="logo-icon" aria-hidden="true">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+        <div class="logo-text">
+          <h1>Karmayogi LearnAI</h1>
+          <span>AI-Powered Learning Platform</span>
+        </div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <div class="nav-label">Main</div>
+        <a href="#" class="nav-item active" aria-current="page">
+          <i class="fas fa-th-large"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="fas fa-book-open"></i>
+          <span>My Learning</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="fas fa-clipboard-check"></i>
+          <span>Assessments</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="fas fa-chart-bar"></i>
+          <span>Competency Gaps</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="fas fa-lightbulb"></i>
+          <span>Recommendations</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="fas fa-robot"></i>
+          <span>AI Tutor</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="fas fa-chart-line"></i>
+          <span>Progress</span>
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-label">Account</div>
+        <a href="#" class="nav-item">
+          <i class="fas fa-user"></i>
+          <span>Profile</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="fas fa-cog"></i>
+          <span>Settings</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a href="#" class="nav-item">
+        <i class="fas fa-question-circle"></i>
+        <span>Help &amp; Support</span>
+      </a>
+      <a href="#" class="nav-item">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </a>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebarOverlay" aria-hidden="true"></div>
+
+  <!-- ========== MAIN CONTENT ========== -->
+  <div class="main-wrapper">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-left">
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="page-title">
+          <h2>Dashboard</h2>
+          <p>Welcome back, Priya. Here's your learning overview.</p>
+        </div>
+      </div>
+      <div class="header-right">
+        <button class="notification-btn" aria-label="Notifications">
+          <i class="far fa-bell"></i>
+          <span class="notification-badge" aria-hidden="true"></span>
+        </button>
+        <div class="user-menu" role="button" tabindex="0" aria-label="User menu">
+          <div class="user-avatar" aria-hidden="true">PS</div>
+          <div class="user-info">
+            <div class="name">Priya Sharma</div>
+            <div class="role">Statistical Officer</div>
+          </div>
+          <i class="fas fa-chevron-down" aria-hidden="true"></i>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content Area -->
+    <main class="content">
+      <!-- Welcome Banner -->
+      <section class="welcome-banner" aria-label="Welcome">
+        <div class="welcome-text">
+          <h3>Good morning, Priya 👋</h3>
+          <p>Continue building your professional competencies with personalized learning.</p>
+        </div>
+        <div class="welcome-stats">
+          <div class="welcome-stat">
+            <div class="value">7 Days</div>
+            <div class="label">Learning Streak</div>
+          </div>
+          <div class="welcome-stat">
+            <div class="value">2 days ago</div>
+            <div class="label">Last Assessment</div>
+          </div>
+        </div>
+        <div class="welcome-cta">
+          <a href="#" class="btn btn-primary">
+            <i class="fas fa-play"></i>
+            Continue Learning
+          </a>
+        </div>
+      </section>
+
+      <!-- KPI Cards -->
+      <section class="kpi-grid" aria-label="Key performance indicators">
+        <!-- Card 1: Overall Competency -->
+        <article class="kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-title">Overall Competency</span>
+            <div class="kpi-icon blue" aria-hidden="true">
+              <i class="fas fa-trophy"></i>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <div class="circular-progress" aria-label="72 percent competency">
+              <svg width="56" height="56" viewBox="0 0 56 56">
+                <circle class="bg" cx="28" cy="28" r="25"></circle>
+                <circle class="fg" cx="28" cy="28" r="25"></circle>
+              </svg>
+              <span class="pct">72%</span>
+            </div>
+            <div>
+              <div class="kpi-value">72%</div>
+              <div class="kpi-sub positive">+8% this month</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2: Learning Progress -->
+        <article class="kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-title">Learning Progress</span>
+            <div class="kpi-icon green" aria-hidden="true">
+              <i class="fas fa-book-reader"></i>
+            </div>
+          </div>
+          <div class="kpi-value">68%</div>
+          <div class="kpi-sub">12 of 18 modules completed</div>
+          <div class="progress-bar-wrap" role="progressbar" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar-fill"></div>
+          </div>
+        </article>
+
+        <!-- Card 3: Assessments -->
+        <article class="kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-title">Assessments</span>
+            <div class="kpi-icon orange" aria-hidden="true">
+              <i class="fas fa-clipboard-list"></i>
+            </div>
+          </div>
+          <div class="kpi-value">8</div>
+          <div class="kpi-sub">6 completed · 2 pending</div>
+        </article>
+
+        <!-- Card 4: Learning Streak -->
+        <article class="kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-title">Learning Streak</span>
+            <div class="kpi-icon indigo" aria-hidden="true">
+              <i class="fas fa-fire"></i>
+            </div>
+          </div>
+          <div class="kpi-value">7 Days</div>
+          <div class="kpi-sub">Keep it going!</div>
+        </article>
+      </section>
+
+      <!-- Competency Overview + Recent Activity -->
+      <div class="grid-2">
+        <!-- Competency Overview -->
+        <section class="card" aria-labelledby="competency-title">
+          <div class="card-header">
+            <div>
+              <h3 id="competency-title">Competency Overview</h3>
+              <p>Your current performance across key competency areas.</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="competency-list">
+              <div class="competency-item">
+                <div>
+                  <div class="competency-name">Survey Sampling</div>
+                  <span class="competency-status status-strong">Strong</span>
+                </div>
+                <div class="competency-bar-wrap">
+                  <div class="competency-bar strong" style="width: 89%;" role="progressbar" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <div class="competency-pct">89%</div>
+              </div>
+
+              <div class="competency-item">
+                <div>
+                  <div class="competency-name">Data Collection</div>
+                  <span class="competency-status status-strong">Strong</span>
+                </div>
+                <div class="competency-bar-wrap">
+                  <div class="competency-bar strong" style="width: 82%;" role="progressbar" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <div class="competency-pct">82%</div>
+              </div>
+
+              <div class="competency-item">
+                <div>
+                  <div class="competency-name">Data Analysis</div>
+                  <span class="competency-status status-good">Good</span>
+                </div>
+                <div class="competency-bar-wrap">
+                  <div class="competency-bar good" style="width: 71%;" role="progressbar" aria-valuenow="71" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <div class="competency-pct">71%</div>
+              </div>
+
+              <div class="competency-item">
+                <div>
+                  <div class="competency-name">Statistical Methods</div>
+                  <span class="competency-status status-needs">Needs Improvement</span>
+                </div>
+                <div class="competency-bar-wrap">
+                  <div class="competency-bar needs" style="width: 64%;" role="progressbar" aria-valuenow="64" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <div class="competency-pct">64%</div>
+              </div>
+
+              <div class="competency-item">
+                <div>
+                  <div class="competency-name">Data Ethics</div>
+                  <span class="competency-status status-gap">Gap</span>
+                </div>
+                <div class="competency-bar-wrap">
+                  <div class="competency-bar gap" style="width: 42%;" role="progressbar" aria-valuenow="42" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <div class="competency-pct">42%</div>
+              </div>
+            </div>
+
+            <div class="competency-alert">
+              <i class="fas fa-exclamation-circle" aria-hidden="true"></i>
+              <div class="competency-alert-content">
+                <h4>1 competency requires attention</h4>
+                <p><strong>Data Ethics</strong> — Current score: 42%. Recommended action: Complete the recommended learning modules.</p>
+                <a href="#" class="btn btn-outline btn-sm">
+                  View Competency Gaps
+                  <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Recent Activity -->
+        <section class="card" aria-labelledby="activity-title">
+          <div class="card-header">
+            <div>
+              <h3 id="activity-title">Recent Activity</h3>
+              <p>Your latest learning actions</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="activity-list">
+              <div class="activity-item">
+                <div class="activity-icon" aria-hidden="true">
+                  <i class="fas fa-check"></i>
+                </div>
+                <div class="activity-content">
+                  <p>Completed "Data Collection Basics"</p>
+                  <time datetime="2026-09-19">Sep 19, 2026</time>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-icon" aria-hidden="true">
+                  <i class="fas fa-check"></i>
+                </div>
+                <div class="activity-content">
+                  <p>Scored 82% in "Survey Sampling Assessment"</p>
+                  <time datetime="2026-09-18">Sep 18, 2026</time>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-icon" aria-hidden="true">
+                  <i class="fas fa-check"></i>
+                </div>
+                <div class="activity-content">
+                  <p>Started "Advanced Data Analysis"</p>
+                  <time datetime="2026-09-16">Sep 16, 2026</time>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-icon" aria-hidden="true">
+                  <i class="fas fa-check"></i>
+                </div>
+                <div class="activity-content">
+                  <p>Completed "Introduction to Statistical Methods"</p>
+                  <time datetime="2026-09-14">Sep 14, 2026</time>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Recommended for You -->
+      <section aria-labelledby="recommendations-title" style="margin-bottom: 24px;">
+        <div style="margin-bottom: 16px;">
+          <h3 id="recommendations-title" style="font-size: 1rem; font-weight: 600; color: var(--text-primary);">Recommended for You</h3>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;">Learning selected based on your competency profile.</p>
+        </div>
+        <div class="grid-3">
+          <!-- Course 1 -->
+          <article class="course-card">
+            <div class="course-icon ethics" aria-hidden="true">
+              <i class="fas fa-balance-scale"></i>
+            </div>
+            <div class="course-category">Data Ethics</div>
+            <h4 class="course-title">Data Ethics for Statistical Officers</h4>
+            <div class="course-meta">
+              <span><i class="far fa-clock"></i> 2h 30m</span>
+              <span><i class="fas fa-signal"></i> Intermediate</span>
+            </div>
+            <div class="course-reason">
+              Recommended because your Data Ethics competency needs improvement.
+            </div>
+            <a href="#" class="btn btn-primary btn-sm">Start Learning</a>
+          </article>
+
+          <!-- Course 2 -->
+          <article class="course-card">
+            <div class="course-icon analysis" aria-hidden="true">
+              <i class="fas fa-chart-pie"></i>
+            </div>
+            <div class="course-category">Data Analysis</div>
+            <h4 class="course-title">Advanced Data Analysis</h4>
+            <div class="course-meta">
+              <span><i class="far fa-clock"></i> 3h 15m</span>
+              <span><i class="fas fa-signal"></i> Intermediate</span>
+            </div>
+            <div class="course-reason">
+              Builds on your current Data Analysis score of 71% to reach advanced proficiency.
+            </div>
+            <a href="#" class="btn btn-primary btn-sm">Continue Learning</a>
+          </article>
+
+          <!-- Course 3 -->
+          <article class="course-card">
+            <div class="course-icon sampling" aria-hidden="true">
+              <i class="fas fa-poll"></i>
+            </div>
+            <div class="course-category">Survey Sampling</div>
+            <h4 class="course-title">Modern Survey Sampling Techniques</h4>
+            <div class="course-meta">
+              <span><i class="far fa-clock"></i> 2h</span>
+              <span><i class="fas fa-signal"></i> Advanced</span>
+            </div>
+            <div class="course-reason">
+              Strengthen your already strong Survey Sampling skills with advanced methods.
+            </div>
+            <a href="#" class="btn btn-outline btn-sm">View Course</a>
+          </article>
+        </div>
+      </section>
+
+      <!-- Upcoming Assessments + Learning Progress Chart -->
+      <div class="grid-2-equal">
+        <!-- Upcoming Assessments -->
+        <section class="card" aria-labelledby="assessments-title">
+          <div class="card-header">
+            <div>
+              <h3 id="assessments-title">Upcoming Assessments</h3>
+              <p>Assessments due in the next two weeks</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="assessment-list">
+              <div class="assessment-row">
+                <div class="assessment-info">
+                  <h4>Data Ethics Fundamentals</h4>
+                  <div class="assessment-meta">
+                    <span>20 questions</span>
+                    <span>Due: Sep 24, 2026</span>
+                    <span class="status-badge pending">Pending</span>
+                  </div>
+                </div>
+                <a href="#" class="btn btn-primary btn-sm">Start</a>
+              </div>
+              <div class="assessment-row">
+                <div class="assessment-info">
+                  <h4>Survey Sampling Assessment</h4>
+                  <div class="assessment-meta">
+                    <span>15 questions</span>
+                    <span>Due: Sep 28, 2026</span>
+                    <span class="status-badge pending">Pending</span>
+                  </div>
+                </div>
+                <a href="#" class="btn btn-outline btn-sm">View</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Learning Progress Chart -->
+        <section class="card" aria-labelledby="progress-title">
+          <div class="card-header">
+            <div>
+              <h3 id="progress-title">Learning Progress</h3>
+              <p>Overall competency improvement</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="chart-container" id="progressChart" role="img" aria-label="Line chart showing competency progress from 42% in April to 72% in September">
+              <!-- SVG chart rendered by JS -->
+            </div>
+            <p class="chart-label">Last 6 months · April – September 2026</p>
+          </div>
+        </section>
+      </div>
+
+      <!-- AI Tutor Quick Access -->
+      <section class="ai-tutor-card" aria-label="AI Tutor">
+        <div class="ai-tutor-left">
+          <div class="ai-tutor-icon" aria-hidden="true">
+            <i class="fas fa-robot"></i>
+          </div>
+          <div class="ai-tutor-text">
+            <h3>Need help understanding something?</h3>
+            <p>Ask AI Tutor questions about your learning material and get explanations based on your approved course content.</p>
+          </div>
+        </div>
+        <a href="#" class="btn btn-primary">
+          Ask AI Tutor
+          <i class="fas fa-arrow-right"></i>
+        </a>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <strong>Karmayogi LearnAI</strong> · AI-Powered Personalized Learning Platform
+        </div>
+        <div class="footer-links">
+          <a href="#">Help</a>
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+        </div>
+        <div class="footer-copy">
+          © 2026 Karmayogi LearnAI. All rights reserved.
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    /* ========== SIDEBAR TOGGLE (Mobile) ========== */
+    (function () {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      const toggle = document.getElementById('menuToggle');
+
+      function openSidebar() {
+        sidebar.classList.add('open');
+        overlay.classList.add('active');
+        overlay.setAttribute('aria-hidden', 'false');
+      }
+
+      function closeSidebar() {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('active');
+        overlay.setAttribute('aria-hidden', 'true');
+      }
+
+      toggle.addEventListener('click', function () {
+        if (sidebar.classList.contains('open')) {
+          closeSidebar();
+        } else {
+          openSidebar();
+        }
+      });
+
+      overlay.addEventListener('click', closeSidebar);
+
+      // Close on escape
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && sidebar.classList.contains('open')) {
+          closeSidebar();
+        }
+      });
+    })();
+
+    /* ========== LEARNING PROGRESS CHART (SVG) ========== */
+    (function () {
+      const data = [
+        { month: 'Apr', value: 42 },
+        { month: 'May', value: 48 },
+        { month: 'Jun', value: 55 },
+        { month: 'Jul', value: 61 },
+        { month: 'Aug', value: 65 },
+        { month: 'Sep', value: 72 }
+      ];
+
+      const container = document.getElementById('progressChart');
+      if (!container) return;
+
+      const width = 400;
+      const height = 180;
+      const padding = { top: 20, right: 20, bottom: 36, left: 40 };
+      const chartW = width - padding.left - padding.right;
+      const chartH = height - padding.top - padding.bottom;
+
+      const minVal = 30;
+      const maxVal = 80;
+      const range = maxVal - minVal;
+
+      function xScale(i) {
+        return padding.left + (i / (data.length - 1)) * chartW;
+      }
+
+      function yScale(v) {
+        return padding.top + chartH - ((v - minVal) / range) * chartH;
+      }
+
+      // Build path
+      let pathD = '';
+      data.forEach(function (d, i) {
+        const x = xScale(i);
+        const y = yScale(d.value);
+        pathD += (i === 0 ? 'M' : 'L') + x + ',' + y;
+      });
+
+      // Area path (for subtle fill)
+      let areaD = pathD + ' L' + xScale(data.length - 1) + ',' + (padding.top + chartH) +
+        ' L' + xScale(0) + ',' + (padding.top + chartH) + ' Z';
+
+      // Grid lines
+      const gridYs = [40, 50, 60, 70];
+      let gridLines = '';
+      gridYs.forEach(function (v) {
+        const y = yScale(v);
+        gridLines += '<line x1="' + padding.left + '" y1="' + y + '" x2="' + (width - padding.right) +
+          '" y2="' + y + '" stroke="#e9ecef" stroke-width="1" />';
+        gridLines += '<text x="' + (padding.left - 8) + '" y="' + (y + 4) +
+          '" text-anchor="end" font-size="11" fill="#868e96" font-family="Inter, sans-serif">' + v + '%</text>';
+      });
+
+      // Points and labels
+      let points = '';
+      let labels = '';
+      data.forEach(function (d, i) {
+        const x = xScale(i);
+        const y = yScale(d.value);
+        points += '<circle cx="' + x + '" cy="' + y + '" r="4" fill="#3b5bdb" stroke="#fff" stroke-width="2" />';
+        labels += '<text x="' + x + '" y="' + (height - 12) +
+          '" text-anchor="middle" font-size="11" fill="#868e96" font-family="Inter, sans-serif">' + d.month + '</text>';
+      });
+
+      const svg = '<svg viewBox="0 0 ' + width + ' ' + height + '" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">' +
+        gridLines +
+        '<path d="' + areaD + '" fill="#edf2ff" opacity="0.6" />' +
+        '<path d="' + pathD + '" fill="none" stroke="#3b5bdb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />' +
+        points +
+        labels +
+        '</svg>';
+
+      container.innerHTML = svg;
+    })();
+  </script>
+</body>
+</html>
