@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Create your Karmayogi LearnAI account" />
+  <title>Create account | Karmayogi LearnAI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    :root {
+      --primary: #3b5bdb;
+      --primary-hover: #364fc7;
+      --primary-light: #edf2ff;
+      --text-primary: #1a1d23;
+      --text-secondary: #495057;
+      --text-muted: #868e96;
+      --border: #e9ecef;
+      --border-strong: #dee2e6;
+      --bg-body: #f1f3f5;
+      --danger: #e03131;
+      --success: #2f9e44;
+      --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { font-size: 15px; -webkit-font-smoothing: antialiased; }
+    body {
+      min-height: 100vh;
+      margin: 0;
+      color: var(--text-primary);
+      background: var(--bg-body);
+      font-family: var(--font);
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+
+    .auth-shell {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(420px, 0.95fr);
+      min-height: 100vh;
+    }
+
+    .auth-visual {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      padding: clamp(32px, 6vw, 80px);
+      color: #fff;
+      background: linear-gradient(145deg, #364fc7 0%, #3b5bdb 48%, #4c6ef5 100%);
+    }
+
+    .auth-visual::before,
+    .auth-visual::after {
+      position: absolute;
+      content: '';
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .auth-visual::before {
+      width: min(42vw, 520px);
+      height: min(42vw, 520px);
+      right: -18%;
+      bottom: -22%;
+    }
+    .auth-visual::after {
+      width: min(29vw, 360px);
+      height: min(29vw, 360px);
+      right: 7%;
+      bottom: 12%;
+    }
+
+    .brand {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      width: fit-content;
+    }
+    .brand-mark {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border-radius: 10px;
+      color: var(--primary);
+      background: #fff;
+      font-size: 1.15rem;
+    }
+    .brand-name { display: block; font-size: 1rem; font-weight: 700; }
+    .brand-tagline {
+      display: block;
+      margin-top: 2px;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 0.72rem;
+      font-weight: 500;
+    }
+
+    .visual-copy {
+      position: relative;
+      z-index: 1;
+      max-width: 500px;
+      padding: 72px 0;
+    }
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 20px;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .visual-copy h1 {
+      max-width: 480px;
+      margin: 0 0 18px;
+      font-size: clamp(2.2rem, 4.2vw, 4rem);
+      font-weight: 700;
+      letter-spacing: -0.045em;
+      line-height: 1.08;
+    }
+    .visual-copy p {
+      max-width: 430px;
+      margin: 0;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+    .visual-footer {
+      position: relative;
+      z-index: 1;
+      color: rgba(255, 255, 255, 0.64);
+      font-size: 0.75rem;
+    }
+
+    .auth-panel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(24px, 5vw, 64px);
+      background: var(--bg-body);
+    }
+    .auth-card {
+      width: min(100%, 430px);
+      padding: clamp(28px, 4vw, 44px);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+      box-shadow: 0 12px 32px rgba(26, 29, 35, 0.08);
+    }
+    .auth-heading { margin-bottom: 26px; }
+    .auth-heading h2 {
+      margin: 0 0 8px;
+      font-size: 1.55rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+    }
+    .auth-heading p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+    .form-group { margin-bottom: 16px; }
+    .form-label {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .input-wrap { position: relative; }
+    .input-icon {
+      position: absolute;
+      top: 50%;
+      left: 14px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      pointer-events: none;
+      transform: translateY(-50%);
+    }
+    .form-input {
+      width: 100%;
+      height: 44px;
+      padding: 0 14px 0 40px;
+      border: 1px solid var(--border-strong);
+      border-radius: 6px;
+      outline: none;
+      color: var(--text-primary);
+      background: #fff;
+      font-size: 0.875rem;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .form-input::placeholder { color: #adb5bd; }
+    .form-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(59, 91, 219, 0.12);
+    }
+    .password-input { padding-right: 46px; }
+    .password-toggle {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      width: 28px;
+      height: 28px;
+      border: 0;
+      border-radius: 4px;
+      color: var(--text-muted);
+      background: transparent;
+      transform: translateY(-50%);
+    }
+    .password-toggle:hover,
+    .password-toggle:focus-visible {
+      color: var(--primary);
+      background: var(--primary-light);
+      outline: none;
+    }
+    .terms {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin: 4px 0 22px;
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      line-height: 1.45;
+    }
+    .terms input {
+      width: 15px;
+      height: 15px;
+      flex: 0 0 auto;
+      margin: 1px 0 0;
+      accent-color: var(--primary);
+    }
+    .text-link {
+      color: var(--primary);
+      font-weight: 600;
+    }
+    .text-link:hover { color: var(--primary-hover); text-decoration: underline; }
+    .submit-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      width: 100%;
+      height: 46px;
+      border: 0;
+      border-radius: 6px;
+      color: #fff;
+      background: var(--primary);
+      font-size: 0.875rem;
+      font-weight: 600;
+      transition: background 0.15s, box-shadow 0.15s;
+    }
+    .submit-btn:hover {
+      background: var(--primary-hover);
+      box-shadow: 0 4px 12px rgba(59, 91, 219, 0.28);
+    }
+    .submit-btn:disabled { cursor: wait; opacity: 0.75; }
+    .form-message {
+      min-height: 20px;
+      margin: 14px 0 0;
+      color: var(--danger);
+      font-size: 0.78rem;
+      text-align: center;
+    }
+    .form-message.success { color: var(--success); }
+    .signin-prompt {
+      margin: 24px 0 0;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      text-align: center;
+    }
+    .signin-prompt .text-link { margin-left: 4px; }
+
+    @media (max-width: 780px) {
+      .auth-shell { display: block; }
+      .auth-visual {
+        min-height: 310px;
+        padding: 28px 24px;
+      }
+      .visual-copy { padding: 42px 0 18px; }
+      .visual-copy h1 { font-size: clamp(2rem, 8vw, 3rem); }
+      .visual-copy p { font-size: 0.875rem; }
+      .visual-footer { display: none; }
+      .auth-panel {
+        min-height: calc(100vh - 310px);
+        padding: 24px;
+      }
+    }
+    @media (max-width: 420px) {
+      .auth-card { padding: 26px 20px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="auth-shell">
+    <section class="auth-visual" aria-label="About Karmayogi LearnAI">
+      <a class="brand" href="index.html" aria-label="Karmayogi LearnAI home">
+        <span class="brand-mark" aria-hidden="true"><i class="fa-solid fa-graduation-cap"></i></span>
+        <span>
+          <span class="brand-name">Karmayogi LearnAI</span>
+          <span class="brand-tagline">AI-Powered Learning Platform</span>
+        </span>
+      </a>
+
+      <div class="visual-copy">
+        <span class="eyebrow"><i class="fa-solid fa-sparkles" aria-hidden="true"></i> Start your journey</span>
+        <h1>Make every learning moment count.</h1>
+        <p>Create your account and get a learning experience tailored to your skills, goals, and career ambitions.</p>
+      </div>
+
+      <p class="visual-footer">Empowering continuous learning, one step at a time.</p>
+    </section>
+
+    <section class="auth-panel">
+      <div class="auth-card">
+        <div class="auth-heading">
+          <h2>Create your account</h2>
+          <p>Join Karmayogi LearnAI and start learning today.</p>
+        </div>
+
+        <form id="register-form" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="name">Full name</label>
+            <div class="input-wrap">
+              <i class="input-icon fa-regular fa-user" aria-hidden="true"></i>
+              <input class="form-input" id="name" name="name" type="text" autocomplete="name" placeholder="Your full name" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="email">Email address</label>
+            <div class="input-wrap">
+              <i class="input-icon fa-regular fa-envelope" aria-hidden="true"></i>
+              <input class="form-input" id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="password">Password</label>
+            <div class="input-wrap">
+              <i class="input-icon fa-solid fa-lock" aria-hidden="true"></i>
+              <input class="form-input password-input" id="password" name="password" type="password" autocomplete="new-password" placeholder="At least 6 characters" minlength="6" required />
+              <button class="password-toggle" type="button" data-target="password" aria-label="Show password" aria-pressed="false"><i class="fa-regular fa-eye" aria-hidden="true"></i></button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="confirm-password">Confirm password</label>
+            <div class="input-wrap">
+              <i class="input-icon fa-solid fa-shield-halved" aria-hidden="true"></i>
+              <input class="form-input password-input" id="confirm-password" name="confirm-password" type="password" autocomplete="new-password" placeholder="Re-enter your password" minlength="6" required />
+              <button class="password-toggle" type="button" data-target="confirm-password" aria-label="Show password" aria-pressed="false"><i class="fa-regular fa-eye" aria-hidden="true"></i></button>
+            </div>
+          </div>
+
+          <label class="terms" for="terms">
+            <input id="terms" name="terms" type="checkbox" required />
+            <span>I agree to the <a class="text-link" href="#">Terms of Service</a> and <a class="text-link" href="#">Privacy Policy</a>.</span>
+          </label>
+
+          <button class="submit-btn" type="submit">
+            <span>Create account</span>
+            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+          </button>
+          <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+        </form>
+
+        <p class="signin-prompt">Already have an account?<a class="text-link" href="login.html">Sign in</a></p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const form = document.getElementById('register-form');
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('confirm-password');
+    const formMessage = document.getElementById('form-message');
+
+    document.querySelectorAll('.password-toggle').forEach(function (toggle) {
+      toggle.addEventListener('click', function () {
+        const input = document.getElementById(toggle.dataset.target);
+        const shouldShow = input.type === 'password';
+        input.type = shouldShow ? 'text' : 'password';
+        toggle.setAttribute('aria-label', shouldShow ? 'Hide password' : 'Show password');
+        toggle.setAttribute('aria-pressed', String(shouldShow));
+        toggle.querySelector('i').className = shouldShow ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye';
+      });
+    });
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      formMessage.className = 'form-message';
+      formMessage.textContent = '';
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      if (password.value !== confirmPassword.value) {
+        formMessage.textContent = 'Passwords do not match.';
+        confirmPassword.focus();
+        return;
+      }
+
+      formMessage.className = 'form-message success';
+      formMessage.textContent = 'Your account is ready to be created.';
+    });
+
+    document.querySelectorAll('.terms a').forEach(function (link) {
+      link.addEventListener('click', function (event) {
+        event.preventDefault();
+      });
+    });
+  </script>
+</body>
+</html>
