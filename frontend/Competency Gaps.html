@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkillNexa | Competency Gaps</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Use your common SkillNexa stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
+
+</head>
+
+<body>
+  <div class="app">
+
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-wrap">
+          <div class="logo-icon"><i class="fas fa-graduation-cap"></i></div>
+          <div class="logo-text">
+            <h1>SkillNexa</h1>
+            <span>AI-Powered Learning Platform</span>
+          </div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <div class="nav-label">Main</div>
+          <a href="index.html" class="nav-item"><i class="fas fa-th-large"></i><span>Dashboard</span></a>
+          <a href="my_learning.html" class="nav-item"><i class="fas fa-book-open"></i><span>My Learning</span></a>
+          <a href="#" class="nav-item"><i class="fas fa-clipboard-check"></i><span>Assessments</span></a>
+          <a href="competency_gaps.html" class="nav-item active"><i class="fas fa-chart-bar"></i><span>Competency Gaps</span></a>
+          <a href="#" class="nav-item"><i class="fas fa-lightbulb"></i><span>Recommendations</span></a>
+          <a href="#" class="nav-item"><i class="fas fa-robot"></i><span>AI Tutor</span></a>
+          <a href="#" class="nav-item"><i class="fas fa-chart-line"></i><span>Progress</span></a>
+        </div>
+
+        <div class="nav-section">
+          <div class="nav-label">Account</div>
+          <a href="#" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
+          <a href="#" class="nav-item"><i class="fas fa-cog"></i><span>Settings</span></a>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="#" class="nav-item"><i class="fas fa-question-circle"></i><span>Help &amp; Support</span></a>
+        <a href="#" class="nav-item"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <div class="page-title">Competency Gaps</div>
+          <div class="page-subtitle">Identify skill gaps and focus on the areas that need improvement.</div>
+        </div>
+
+        <div class="top-actions">
+          <div class="bell">♧<span class="bell-dot"></span></div>
+          <div class="user">
+            <div class="avatar">PS</div>
+            <div>
+              <div class="user-name">Priya Sharma</div>
+              <div class="user-role">Statistical Officer</div>
+            </div>
+            <span>⌄</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="content">
+        <section class="gap-page">
+
+          <div class="gap-header">
+            <div>
+              <h2>Competency Gaps</h2>
+              <p>Compare your current skill level with the target level for your role.</p>
+            </div>
+            <div class="gap-actions">
+              <button class="gap-btn" onclick="resetFilters()"><i class="fas fa-rotate-left"></i> Reset</button>
+              <button class="gap-btn primary" onclick="showRecommended()"><i class="fas fa-wand-magic-sparkles"></i> Learning Plan</button>
+            </div>
+          </div>
+
+          <div class="gap-summary">
+            <div class="gap-stat">
+              <div class="gap-stat-top">
+                <small>Total Skills</small>
+                <div class="gap-stat-icon"><i class="fas fa-layer-group"></i></div>
+              </div>
+              <strong id="totalSkills">8</strong>
+            </div>
+
+            <div class="gap-stat">
+              <div class="gap-stat-top">
+                <small>Skills With Gaps</small>
+                <div class="gap-stat-icon"><i class="fas fa-chart-line"></i></div>
+              </div>
+              <strong id="skillsWithGaps">6</strong>
+            </div>
+
+            <div class="gap-stat">
+              <div class="gap-stat-top">
+                <small>High Priority</small>
+                <div class="gap-stat-icon"><i class="fas fa-triangle-exclamation"></i></div>
+              </div>
+              <strong id="highPriority">3</strong>
+            </div>
+
+            <div class="gap-stat">
+              <div class="gap-stat-top">
+                <small>Overall Readiness</small>
+                <div class="gap-stat-icon"><i class="fas fa-bullseye"></i></div>
+              </div>
+              <strong>68%</strong>
+            </div>
+          </div>
+
+          <div class="gap-layout">
+
+            <section class="gap-panel">
+              <div class="gap-panel-head">
+                <div>
+                  <h3>Skill Gap Analysis</h3>
+                  <p>Current proficiency compared with expected proficiency.</p>
+                </div>
+
+                <div class="gap-filters">
+                  <button class="gap-filter active" onclick="filterGaps('All', this)">All</button>
+                  <button class="gap-filter" onclick="filterGaps('High', this)">High</button>
+                  <button class="gap-filter" onclick="filterGaps('Medium', this)">Medium</button>
+                  <button class="gap-filter" onclick="filterGaps('Low', this)">Low</button>
+                </div>
+              </div>
+
+              <div class="gap-table-wrap">
+                <table class="gap-table">
+                  <thead>
+                    <tr>
+                      <th>Competency</th>
+                      <th>Current</th>
+                      <th>Target</th>
+                      <th>Gap</th>
+                      <th>Priority</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="gapTable"></tbody>
+                </table>
+              </div>
+            </section>
+
+            <div class="side-stack">
+
+              <section class="gap-panel progress-card">
+                <h3>Competency Readiness</h3>
+                <p>Your overall progress toward target competency.</p>
+
+                <div class="donut">
+                  <div class="donut-inner">
+                    <strong>68%</strong>
+                    <span>Ready</span>
+                  </div>
+                </div>
+
+                <div class="legend">
+                  <div class="legend-row">
+                    <div class="legend-left"><span class="dot"></span>Achieved</div>
+                    <strong>68%</strong>
+                  </div>
+                  <div class="legend-row">
+                    <div class="legend-left"><span class="dot gray"></span>Remaining</div>
+                    <strong>32%</strong>
+                  </div>
+                </div>
+              </section>
+
+              <section class="gap-panel recommendations">
+                <h3>Recommended Focus</h3>
+
+                <div class="recommendation" onclick="focusSkill('Data Analysis')">
+                  <strong>Data Analysis</strong>
+                  <span>Practice data cleaning, exploration and interpretation.</span>
+                </div>
+
+                <div class="recommendation" onclick="focusSkill('Python Programming')">
+                  <strong>Python Programming</strong>
+                  <span>Build confidence with functions, loops and problem solving.</span>
+                </div>
+
+                <div class="recommendation" onclick="focusSkill('Statistics')">
+                  <strong>Statistics</strong>
+                  <span>Strengthen statistical concepts and interpretation.</span>
+                </div>
+              </section>
+
+            </div>
+          </div>
+
+        </section>
+      </div>
+
+      <footer>© 2026 SkillNexa • Learn something new every day.</footer>
+    </main>
+  </div>
+
+  <script>
+    const competencies = [
+      { name: "Data Analysis", category: "Data", current: 58, target: 85, priority: "High" },
+      { name: "Python Programming", category: "Development", current: 52, target: 80, priority: "High" },
+      { name: "Statistics", category: "Data", current: 62, target: 85, priority: "High" },
+      { name: "Machine Learning", category: "Data", current: 64, target: 80, priority: "Medium" },
+      { name: "Communication", category: "Professional", current: 72, target: 85, priority: "Medium" },
+      { name: "Data Visualization", category: "Data", current: 70, target: 80, priority: "Medium" },
+      { name: "Problem Solving", category: "Professional", current: 76, target: 80, priority: "Low" },
+      { name: "HTML & CSS", category: "Development", current: 88, target: 85, priority: "Low" }
+    ];
+
+    const table = document.getElementById("gapTable");
+
+    function levelBar(value) {
+      return `
+        <div class="level">
+          <div class="level-bar">
+            <i style="width:${value}%; background:${value >= 80 ? '#16a34a' : value >= 65 ? '#f59e0b' : '#2563eb'}"></i>
+          </div>
+          <span class="level-value">${value}%</span>
+        </div>
+      `;
+    }
+
+    function renderGaps(list = competencies) {
+      if (!list.length) {
+        table.innerHTML = `<tr><td colspan="6" class="empty-gaps">No competencies found.</td></tr>`;
+        return;
+      }
+
+      table.innerHTML = list.map(skill => {
+        const gap = Math.max(skill.target - skill.current, 0);
+
+        return `
+          <tr>
+            <td>
+              <div class="skill-name">${skill.name}</div>
+              <div class="skill-category">${skill.category}</div>
+            </td>
+            <td>${levelBar(skill.current)}</td>
+            <td>${levelBar(skill.target)}</td>
+            <td><span class="gap-number">${gap}%</span></td>
+            <td><span class="priority ${skill.priority.toLowerCase()}">${skill.priority}</span></td>
+            <td>
+              <button class="learn-btn" onclick="focusSkill('${skill.name}')">Improve</button>
+            </td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    function filterGaps(priority, button) {
+      document.querySelectorAll(".gap-filter").forEach(btn => btn.classList.remove("active"));
+      button.classList.add("active");
+
+      const filtered = priority === "All"
+        ? competencies
+        : competencies.filter(skill => skill.priority === priority);
+
+      renderGaps(filtered);
+    }
+
+    function resetFilters() {
+      document.querySelectorAll(".gap-filter").forEach(btn => btn.classList.remove("active"));
+      document.querySelector(".gap-filter").classList.add("active");
+      renderGaps();
+    }
+
+    function focusSkill(skill) {
+      alert("Learning recommendation for: " + skill);
+    }
+
+    function showRecommended() {
+      const recommended = competencies.filter(skill => skill.priority === "High");
+      renderGaps(recommended);
+      document.querySelectorAll(".gap-filter").forEach(btn => btn.classList.remove("active"));
+      document.querySelectorAll(".gap-filter")[1].classList.add("active");
+    }
+
+    renderGaps();
+  </script>
+</body>
+</html>
