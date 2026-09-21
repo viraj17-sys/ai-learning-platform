@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="C:\Users\DHRUV\ai-learning-platform\frontend\assets\css\style.css" />
+</head>
+
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">🎓</div>
+          <div>
+            <div class="brand-name">SkillNexa</div>
+            <div class="brand-sub">AI-Powered Learning Platform</div>
+          </div>
+        </div>
+
+       <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+    <div class="sidebar-header">
+      <div class="logo-wrap">
+        <div class="logo-icon" aria-hidden="true">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+        <div class="logo-text">
+          <h1>SkillNexa</h1>
+          <span>AI-Powered Learning Platform</span>
+        </div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <div class="nav-label">Main</div>
+        <a href="#" class="nav-item ">
+          <i class="fas fa-th-large"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="#" class="nav-item active" aria-current="page">
+          <i class="fas fa-book-open"></i>
+          <span>My Learning</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="fas fa-clipboard-check"></i>
+          <span>Assessments</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="fas fa-chart-bar"></i>
+          <span>Competency Gaps</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="fas fa-lightbulb"></i>
+          <span>Recommendations</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="fas fa-robot"></i>
+          <span>AI Tutor</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="fas fa-chart-line"></i>
+          <span>Progress</span>
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-label">Account</div>
+        <a href="#" class="nav-item">
+          <i class="fas fa-user"></i>
+          <span>Profile</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="fas fa-cog"></i>
+          <span>Settings</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a href="#" class="nav-item">
+        <i class="fas fa-question-circle"></i>
+        <span>Help &amp; Support</span>
+      </a>
+      <a href="#" class="nav-item">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </a>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebarOverlay" aria-hidden="true"></div>
+
+        <div class="nav-section">
+          <div class="nav-label">ACCOUNT</div>
+          <a class="nav-item" href="#courses"><span class="nav-icon">♟</span>Profile</a>
+          <a class="nav-item" href="#courses"><span class="nav-icon">⚙</span>Settings</a>
+        </div>
+
+        <div class="sidebar-bottom">
+          <a class="nav-item" href="#"><span class="nav-icon">?</span>Help &amp; Support</a>
+          <a class="nav-item" href="#"><span class="nav-icon">↪</span>Logout</a>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <div class="page-title">My Learning</div>
+            <div class="page-subtitle">Explore your courses and continue learning.</div>
+          </div>
+
+          <div class="top-actions">
+            <div class="bell">♧<span class="bell-dot"></span></div>
+
+            <div class="user">
+              <div class="avatar">PS</div>
+              <div>
+                <div class="user-name">Priya Sharma</div>
+                <div class="user-role">Statistical Officer</div>
+              </div>
+              <span>⌄</span>
+            </div>
+          </div>
+        </header>
+
+        <div class="content">
+          <section class="learning-section" id="courses">
+            <div class="section-title">
+              <div>
+                <h2>My Learning</h2>
+                <p>Choose a course and work through its theory and multiple quizzes.</p>
+              </div>
+            </div>
+
+            <div class="filters">
+              <button class="filter active" onclick="filterCourses('All', this)">All</button>
+              <button class="filter" onclick="filterCourses('Development', this)">Development</button>
+              <button class="filter" onclick="filterCourses('Data', this)">Data</button>
+              <button class="filter" onclick="filterCourses('Design', this)">Design</button>
+              <button class="filter" onclick="filterCourses('Business', this)">Business</button>
+            </div>
+
+            <div class="course-grid" id="courseGrid"></div>
+          </section>
+
+          <section class="learning" id="learning">
+            <div class="section-title">
+              <div>
+                <h2 id="lessonTitle">Select a course</h2>
+                <p>Each course contains multiple quizzes shown one by one.</p>
+              </div>
+            </div>
+
+            <div class="lesson-wrap">
+              <article class="panel">
+                <div class="theory">
+                  <h3>Theory</h3>
+                  <div id="theory">Select a course above to read its theory.</div>
+                </div>
+              </article>
+
+              <article class="panel">
+                <div class="quiz-box">
+                  <h3>Course Quiz</h3>
+                  <div id="quiz">
+                    <div class="quiz-empty">Select a course to start its quiz.</div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </section>
+        </div>
+
+        <footer>© 2026 SkillNexa • Learn something new every day.</footer>
+      </main>
+    </div>
+
+    <script>
+      const courses = [
+        {
+          id: 1,
+          cat: 'Development',
+          icon: '💻',
+          title: 'HTML & CSS Basics',
+          desc: 'Learn how webpages are structured and styled.',
+          meta: '8 Lessons • Beginner',
+          progress: 72,
+          theory: `
+            <p>HTML defines the structure of a webpage using elements such as headings, paragraphs, links, images and sections.</p>
+            <p>CSS controls presentation. Selectors target HTML elements and properties such as color, padding, margin and display change their appearance and layout.</p>
+            <ul>
+              <li>HTML = structure</li>
+              <li>CSS = design and layout</li>
+              <li>Responsive CSS helps pages work across screen sizes</li>
+            </ul>
+          `,
+          quiz: [
+            {
+              q: 'Which technology is mainly used to style an HTML webpage?',
+              a: ['HTML', 'CSS', 'SQL', 'Python'],
+              correct: 1,
+            },
+            {
+              q: 'Which HTML element is commonly used for the largest page heading?',
+              a: ['<h1>', '<p>', '<img>', '<a>'],
+              correct: 0,
+            },
+            {
+              q: 'Which CSS property changes the text color?',
+              a: ['font-size', 'background', 'color', 'display'],
+              correct: 2,
+            },
+            {
+              q: 'What does responsive CSS help a webpage do?',
+              a: ['Store data', 'Work across screen sizes', 'Run SQL', 'Create databases'],
+              correct: 1,
+            },
+          ],
+        },
+        {
+          id: 2,
+          cat: 'Development',
+          icon: '⚡',
+          title: 'JavaScript Fundamentals',
+          desc: 'Understand variables, functions, conditions and events.',
+          meta: '10 Lessons • Beginner',
+          progress: 55,
+          theory: `
+            <p>JavaScript adds behavior and interactivity to web pages. Variables store values, functions group reusable instructions, and conditions allow programs to make decisions.</p>
+            <p>JavaScript can also respond to user actions such as clicks and form submissions through events.</p>
+            <ul>
+              <li>Variables hold data</li>
+              <li>Functions reuse logic</li>
+              <li>Events connect code to user actions</li>
+            </ul>
+          `,
+          quiz: [
+            {
+              q: 'Which keyword can declare a block-scoped variable in JavaScript?',
+              a: ['style', 'let', 'html', 'select'],
+              correct: 1,
+            },
+            {
+              q: 'Which symbol is commonly used for strict equality?',
+              a: ['=', '==', '===', '=>'],
+              correct: 2,
+            },
+            {
+              q: 'What is a function used for?',
+              a: ['Reusable instructions', 'Only styling', 'Storing images', 'Creating HTML tags'],
+              correct: 0,
+            },
+            {
+              q: 'Which event commonly runs when a button is clicked?',
+              a: ['click', 'hover-only', 'load-css', 'database'],
+              correct: 0,
+            },
+          ],
+        },
+        {
+          id: 3,
+          cat: 'Development',
+          icon: '🐍',
+          title: 'Python Programming',
+          desc: 'Start programming with Python syntax and problem solving.',
+          meta: '12 Lessons • Beginner',
+          progress: 40,
+          theory: `
+            <p>Python is a general-purpose programming language known for readable syntax. A Python program can use variables, conditions, loops and functions to solve problems.</p>
+            <p>Indentation is significant in Python because it defines code blocks.</p>
+            <ul>
+              <li>Use variables to store values</li>
+              <li>Use loops for repetition</li>
+              <li>Use functions for reusable tasks</li>
+            </ul>
+          `,
+          quiz: [
+            {
+              q: 'What is used to define a block of code in Python?',
+              a: ['Indentation', 'CSS', 'A semicolon only', 'HTML tags'],
+              correct: 0,
+            },
+            {
+              q: 'Which keyword defines a function in Python?',
+              a: ['func', 'def', 'function', 'define'],
+              correct: 1,
+            },
+            {
+              q: 'Which structure repeats code for each item in a sequence?',
+              a: ['if', 'for', 'class', 'import'],
+              correct: 1,
+            },
+            {
+              q: 'Which data type stores an ordered collection that can change?',
+              a: ['tuple', 'list', 'integer', 'boolean'],
+              correct: 1,
+            },
+          ],
+        },
+        {
+          id: 4,
+          cat: 'Data',
+          icon: '📊',
+          title: 'Data Analytics',
+          desc: 'Learn how to understand, clean and interpret data.',
+          meta: '9 Lessons • Intermediate',
+          progress: 64,
+          theory: `
+            <p>Data analytics involves examining data to discover useful information. A typical workflow includes collecting, cleaning, exploring and interpreting data.</p>
+            <p>Charts and summary measures can make patterns easier to understand.</p>
+            <ul>
+              <li>Clean incorrect or missing data</li>
+              <li>Summarize important patterns</li>
+              <li>Communicate findings clearly</li>
+            </ul>
+          `,
+          quiz: [
+            {
+              q: 'What is a common first step before analyzing messy data?',
+              a: ['Ignore it', 'Clean the data', 'Delete every row', 'Publish it'],
+              correct: 1,
+            },
+            {
+              q: 'Which chart is commonly useful for comparing categories?',
+              a: ['Bar chart', 'Password field', 'HTML tag', 'Audio codec'],
+              correct: 0,
+            },
+            {
+              q: 'Why are summary measures useful?',
+              a: ['They describe key patterns', 'They remove all data', 'They hide errors', 'They replace collection'],
+              correct: 0,
+            },
+            {
+              q: 'What should analysts do with missing values?',
+              a: ['Always ignore them', 'Assess and handle them appropriately', 'Turn them into passwords', 'Publish immediately'],
+              correct: 1,
+            },
+          ],
+        },
+        {
+          id: 5,
+          cat: 'Data',
+          icon: '📈',
+          title: 'Statistics Essentials',
+          desc: 'Learn averages, distributions and basic statistical thinking.',
+          meta: '10 Lessons • Beginner',
+          progress: 68,
+          theory: `
+            <p>Statistics helps us describe and understand data. Measures such as mean, median and mode summarize different aspects of a dataset.</p>
+            <p>Variation tells us how spread out observations are. A good analysis considers both the center and the spread of data.</p>
+            <ul>
+              <li>Mean is an arithmetic average</li>
+              <li>Median is the middle value after ordering</li>
+              <li>Variation describes spread</li>
+            </ul>
+          `,
+          quiz: [
+            {
+              q: 'Which measure is the middle value of an ordered dataset?',
+              a: ['Mean', 'Median', 'Range', 'Sum'],
+              correct: 1,
+            },
+            {
+              q: 'What does the mean represent?',
+              a: ['Arithmetic average', 'Middle value only', 'Largest value', 'Number of rows'],
+              correct: 0,
+            },
+            {
+              q: 'What does variation describe?',
+              a: ['Spread of observations', 'Only the average', 'The column name', 'A chart title'],
+              correct: 0,
+            },
+            {
+              q: 'Which value is most affected by an extreme outlier?',
+              a: ['Mean', 'Median', 'Mode', 'Category label'],
+              correct: 0,
+            },
+          ],
+        },
+        {
+          id: 6,
+          cat: 'Data',
+          icon: '🤖',
+          title: 'Machine Learning Basics',
+          desc: 'Understand datasets, features, models and predictions.',
+          meta: '11 Lessons • Intermediate',
+          progress: 31,
+          theory: `
+            <p>Machine learning uses data to build models that identify patterns and make predictions. A dataset often contains features used by a model and a target the model tries to predict.</p>
+            <p>Training data is used to learn model parameters, while separate evaluation data can help measure performance.</p>
+            <ul>
+              <li>Features provide input information</li>
+              <li>Targets represent desired outputs</li>
+              <li>Evaluation measures model performance</li>
+            </ul>
+          `,
+          quiz: [
+            {
+              q: 'What do features generally represent in a machine-learning dataset?',
+              a: ['Input information', 'Only passwords', 'Website colors', 'Quiz answers'],
+              correct: 0,
+            },
+            {
+              q: 'What does a target usually represent?',
+              a: ['Desired output', 'CSS style', 'Browser history', 'File size'],
+              correct: 0,
+            },
+            {
+              q: 'Why separate evaluation data from training data?',
+              a: ['To measure performance on separate data', 'To add colors', 'To remove features', 'To create HTML'],
+              correct: 0,
+            },
+            {
+              q: 'What does a model learn from training data?',
+              a: ['Patterns/parameters useful for prediction', 'Only filenames', 'Browser settings', 'Passwords'],
+              correct: 0,
+            },
+          ],
+        },
+        {
+          id: 7,
+          cat: 'Design',
+          icon: '🎨',
+          title: 'UI/UX Design',
+          desc: 'Learn the foundations of useful and user-friendly interfaces.',
+          meta: '8 Lessons • Beginner',
+          progress: 76,
+          theory: `
+            <p>UI design focuses on the visual interface, while UX design considers how people experience and complete tasks with a product.</p>
+            <p>Good design uses clear hierarchy, consistency, readable content and feedback to help users understand what to do next.</p>
+            <ul>
+              <li>Use clear visual hierarchy</li>
+              <li>Keep navigation understandable</li>
+              <li>Design around user tasks</li>
+            </ul>
+          `,
+          quiz: [
+            {
+              q: 'What does UX primarily focus on?',
+              a: ['User experience', 'Only colors', 'Database storage', 'Server hardware'],
+              correct: 0,
+            },
+            {
+              q: 'What is visual hierarchy used for?',
+              a: ['Helping users understand importance and order', 'Encrypting data', 'Running SQL', 'Compressing images'],
+              correct: 0,
+            },
+            {
+              q: 'Why is consistency important in interface design?',
+              a: ['It makes interactions more predictable', 'It removes all content', 'It changes databases', 'It disables navigation'],
+              correct: 0,
+            },
+            {
+              q: 'What should navigation help users do?',
+              a: ['Understand where to go and what to do next', 'Change server hardware', 'Write Python automatically', 'Delete content'],
+              correct: 0,
+            },
+          ],
+        },
+        {
+          id: 8,
+          cat: 'Business',
+          icon: '💼',
+          title: 'Business Fundamentals',
+          desc: 'Understand goals, customers, value and basic strategy.',
+          meta: '7 Lessons • Beginner',
+          progress: 48,
+          theory: `
+            <p>Business fundamentals cover how organizations create and deliver value. A business needs to understand customer needs, resources, costs and the value it provides.</p>
+            <p>Clear goals help teams decide what to prioritize and how to measure progress.</p>
+            <ul>
+              <li>Understand the customer</li>
+              <li>Define the value offered</li>
+              <li>Track meaningful goals</li>
+            </ul>
+          `,
+          quiz: [
+            {
+              q: 'What should a business understand to create useful value?',
+              a: ['Customer needs', 'Only its logo', 'Only office size', 'Keyboard shortcuts'],
+              correct: 0,
+            },
+            {
+              q: 'Why are clear goals useful?',
+              a: ['They help prioritize and measure progress', 'They replace customers', 'They remove costs', 'They design websites automatically'],
+              correct: 0,
+            },
+            {
+              q: 'What does a value proposition communicate?',
+              a: ['The value offered to customers', 'The office address only', 'A password', 'A CSS selector'],
+              correct: 0,
+            },
+            {
+              q: 'Which factor is important in basic business planning?',
+              a: ['Costs and resources', 'Only font size', 'Only browser type', 'Only screen resolution'],
+              correct: 0,
+            },
+          ],
+        },
+        {
+          id: 9,
+          cat: 'Business',
+          icon: '📣',
+          title: 'Digital Marketing',
+          desc: 'Learn content, audience, channels and campaign basics.',
+          meta: '9 Lessons • Intermediate',
+          progress: 59,
+          theory: `
+            <p>Digital marketing uses online channels to communicate with an audience. Common activities include content creation, search, email and social media marketing.</p>
+            <p>Effective campaigns define an audience and use measurable goals to understand performance.</p>
+            <ul>
+              <li>Identify the target audience</li>
+              <li>Create useful content</li>
+              <li>Measure campaign results</li>
+            </ul>
+          `,
+          quiz: [
+            {
+              q: 'Why are measurable goals useful in a marketing campaign?',
+              a: ['To track performance', 'To hide results', 'To remove the audience', 'To avoid planning'],
+              correct: 0,
+            },
+            {
+              q: 'What should a campaign identify before creating content?',
+              a: ['Target audience', 'Keyboard model', 'Server rack', 'CSS framework'],
+              correct: 0,
+            },
+            {
+              q: 'Which is a common digital marketing channel?',
+              a: ['Email', 'BIOS', 'RAM', 'USB'],
+              correct: 0,
+            },
+            {
+              q: 'Why measure campaign results?',
+              a: ['To understand performance and improve decisions', 'To remove all content', 'To avoid planning', 'To disable analytics'],
+              correct: 0,
+            },
+          ],
+        },
+      ];
+
+      const grid = document.getElementById('courseGrid');
+      let activeCourseId = null;
+      let quizIndex = 0;
+      let quizScore = 0;
+      let quizAnswered = false;
+
+      function render(list = courses) {
+        grid.innerHTML = list
+          .map(
+            (course) => `
+              <article class="course">
+                <div class="course-icon">${course.icon}</div>
+                <h3>${course.title}</h3>
+                <p>${course.desc}</p>
+                <div class="course-meta">${course.meta} • ${course.quiz.length} Quizzes</div>
+                <div class="progress-track"><i style="width: ${course.progress}%"></i></div>
+                <div class="course-bottom">
+                  <span class="percent">${course.progress}%</span>
+                  <button class="learn" onclick="openCourse(${course.id})">Open Course</button>
+                </div>
+              </article>
+            `
+          )
+          .join('');
+      }
+
+      function filterCourses(category, button) {
+        document.querySelectorAll('.filter').forEach((item) => item.classList.remove('active'));
+        button.classList.add('active');
+
+        const filteredCourses = category === 'All' ? courses : courses.filter((course) => course.cat === category);
+        render(filteredCourses);
+      }
+
+      function openCourse(id) {
+        const course = courses.find((item) => item.id === id);
+        activeCourseId = id;
+        quizIndex = 0;
+        quizScore = 0;
+        quizAnswered = false;
+
+        document.getElementById('lessonTitle').textContent = course.title;
+        document.getElementById('theory').innerHTML = course.theory;
+        renderQuiz();
+        document.getElementById('learning').scrollIntoView({ behavior: 'smooth' });
+      }
+
+      function renderQuiz() {
+        const course = courses.find((item) => item.id === activeCourseId);
+        const question = course.quiz[quizIndex];
+
+        document.getElementById('quiz').innerHTML = `
+          <div class="quiz-progress">Quiz ${quizIndex + 1} of ${course.quiz.length} • Score ${quizScore}/${course.quiz.length}</div>
+          <div class="quiz-q">${question.q}</div>
+          ${question.a
+            .map(
+              (option, index) => `
+                <button class="option" onclick="answer(this, ${index}, ${question.correct})">${option}</button>
+              `
+            )
+            .join('')}
+          <button class="next" id="nextBtn" onclick="nextQuiz()" style="display:none;">
+            ${quizIndex === course.quiz.length - 1 ? 'Finish Course Quiz' : 'Next Quiz →'}
+          </button>
+        `;
+      }
+
+      function answer(button, index, correct) {
+        if (quizAnswered) return;
+
+        quizAnswered = true;
+
+        if (index === correct) {
+          quizScore += 1;
+        }
+
+        // Directly move to the next question.
+        // No Correct/Wrong message is shown.
+        setTimeout(() => {
+          nextQuiz();
+        }, 150);
+      }
+
+      function nextQuiz() {
+        const course = courses.find((item) => item.id === activeCourseId);
+
+        if (quizIndex < course.quiz.length - 1) {
+          quizIndex += 1;
+          quizAnswered = false;
+          renderQuiz();
+          return;
+        }
+
+        const wrongCount = course.quiz.length - quizScore;
+        const percentage = Math.round((quizScore / course.quiz.length) * 100);
+        const message =
+          percentage >= 80
+            ? 'Excellent work! 🎉'
+            : percentage >= 60
+              ? 'Good job! Keep practicing. 👍'
+              : 'Keep learning and try again. 💪';
+
+        document.getElementById('quiz').innerHTML = `
+          <div class="quiz-q">Quiz Result 🎉</div>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 15px 0;">
+            <div style="background: #ecfdf3; border: 1px solid #bbf7d0; border-radius: 9px; padding: 13px; text-align: center;">
+              <div style="font-size: 24px; font-weight: 800; color: #15803d;">${quizScore}</div>
+              <div style="font-size: 12px; color: #166534;">Correct</div>
+            </div>
+            <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 9px; padding: 13px; text-align: center;">
+              <div style="font-size: 24px; font-weight: 800; color: #dc2626;">${wrongCount}</div>
+              <div style="font-size: 12px; color: #991b1b;">Wrong</div>
+            </div>
+            <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 9px; padding: 13px; text-align: center;">
+              <div style="font-size: 24px; font-weight: 800; color: #2563eb;">${percentage}%</div>
+              <div style="font-size: 12px; color: #1d4ed8;">Score</div>
+            </div>
+          </div>
+
+          <div class="result" style="color: #334155; margin-bottom: 14px;">
+            ${message}<br />
+            You answered <strong>${quizScore}</strong> correctly and <strong>${wrongCount}</strong> incorrectly out of <strong>${course.quiz.length}</strong> questions.
+          </div>
+
+          <button class="next" onclick="openCourse(${course.id})">Retake Quiz</button>
+        `;
+      }
+
+      render();
+    </script>
+  </body>
+</html>
